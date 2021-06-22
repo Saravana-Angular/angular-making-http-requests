@@ -11,18 +11,32 @@ export class AppComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchPosts();
+  }
 
   onCreatePost(postData: { title: string; content: string }) {
     // Send Http request
-    console.log(postData);
+    this.http.post(
+      'https://ng-recipe-book-89d3c-default-rtdb.firebaseio.com/posts.json', 
+      postData
+      ).subscribe(responseData => {
+        console.log(responseData);
+      })
   }
 
   onFetchPosts() {
     // Send Http request
+    this.fetchPosts();
   }
 
   onClearPosts() {
     // Send Http request
+  }
+
+  private fetchPosts() {
+    this.http.get('https://ng-recipe-book-89d3c-default-rtdb.firebaseio.com/posts.json').subscribe(posts => {
+      console.log(posts);
+    })
   }
 }
