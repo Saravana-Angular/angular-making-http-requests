@@ -21,7 +21,7 @@ export class PostsService {
     }
 
     fetchPosts() {
-        this.http.get<{[key: string]: Post}>('https://ng-recipe-book-89d3c-default-rtdb.firebaseio.com/posts.json')
+        return this.http.get<{[key: string]: Post}>('https://ng-recipe-book-89d3c-default-rtdb.firebaseio.com/posts.json')
         .pipe(map((responseData) => {
           let postsArray: Post[] = [];
           for (const key in responseData) {
@@ -31,7 +31,5 @@ export class PostsService {
           }
           return postsArray;
         }))
-        .subscribe(posts => {
-        })
     }
 }
