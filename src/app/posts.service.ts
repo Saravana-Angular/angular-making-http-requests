@@ -32,4 +32,8 @@ export class PostsService {
           return postsArray;
         }))
     }
+
+    deletePosts() {
+        return this.http.delete('https://ng-recipe-book-89d3c-default-rtdb.firebaseio.com/posts.json');
+    }
 }
