@@ -36,7 +36,8 @@ export class PostsService {
           'https://ng-recipe-book-89d3c-default-rtdb.firebaseio.com/posts.json', 
           {
             headers: new HttpHeaders({'Custom-Header': 'Hello' }),
-            params: searchParams
+            params: searchParams,
+            responseType: 'json' // default response type is json
           }
           )
         .pipe(map((responseData) => {
@@ -57,7 +58,8 @@ export class PostsService {
         return this.http.delete(
           'https://ng-recipe-book-89d3c-default-rtdb.firebaseio.com/posts.json',
           {
-            observe: 'events'
+            observe: 'events',
+            responseType: 'text'
           })
         .pipe(tap((event) => {
           console.log(event)
