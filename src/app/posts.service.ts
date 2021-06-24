@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Post } from './post.model';
 import { catchError, map } from 'rxjs/operators';
@@ -26,10 +26,15 @@ export class PostsService {
     }
 
     fetchPosts() {
+
+        let searchParams = new HttpParams().set('print','pretty');
+        searchParams = searchParams.append('custom', 'key');
+
         return this.http.get<{[key: string]: Post}>(
           'https://ng-recipe-book-89d3c-default-rtdb.firebaseio.com/posts.json', 
           {
-            headers: new HttpHeaders({'Custom-Header': 'Hello' })
+            headers: new HttpHeaders({'Custom-Header': 'Hello' }),
+            params: searchParams
           }
           )
         .pipe(map((responseData) => {
